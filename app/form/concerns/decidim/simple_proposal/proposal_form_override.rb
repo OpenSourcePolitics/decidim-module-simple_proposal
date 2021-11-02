@@ -46,11 +46,11 @@ module Decidim
         end
 
         def require_category?
-          Decidim::SimpleProposal.require_category && categories_enabled?
+          Decidim::SimpleProposal.require_category && categories.count.positive?
         end
 
         def require_scope?
-          Decidim::SimpleProposal.require_scope && scopes_enabled?
+          Decidim::SimpleProposal.require_scope && current_component.has_subscopes?
         end
 
         private
