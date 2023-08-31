@@ -5,7 +5,7 @@ module Decidim
     module ScopesHelperOverride
       extend ActiveSupport::Concern
       included do
-        def scopes_picker_field(form, name, root: false, options: { checkboxes_on_top: true })
+        def scopes_picker_field_override(form, name, root: false, options: { checkboxes_on_top: true })
           options.merge!(selected: selected_scope(form)) if selected_scope(form)
           form.select(name, simple_scope_options(root: root, options: options), include_blank: t("decidim.scopes.prompt"))
         end
