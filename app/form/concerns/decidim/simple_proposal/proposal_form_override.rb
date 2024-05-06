@@ -15,8 +15,8 @@ module Decidim
 
         validates :category_id, presence: true, if: ->(form) { form.require_category? }
         validates :scope_id, presence: true, if: ->(form) { form.require_scope? }
-        validate :check_category
-        validate :check_scope
+        validate :check_category, if: ->(form) { form.require_category? }
+        validate :check_scope, if: ->(form) { form.require_scope? }
 
         def map_model(model)
           super
