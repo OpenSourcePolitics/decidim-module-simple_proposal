@@ -1,0 +1,7 @@
+fr:
+  decidim:
+    proposals:
+      admin:
+        proposals:
+          form:
+            require_category: La catégorie est obligatoire

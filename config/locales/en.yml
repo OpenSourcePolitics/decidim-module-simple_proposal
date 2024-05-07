@@ -207,6 +207,8 @@ en:
           publish:
             success: All ideas have been published
         proposals:
+          form:
+            require_category: category is required
           show:
             body: Idean kuvaus
         proposal_answers:
