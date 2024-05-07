@@ -9,6 +9,7 @@ module Decidim
         app.config.to_prepare do
           Decidim::Proposals::ProposalsController.include Decidim::SimpleProposal::ProposalsControllerOverride
           Decidim::Proposals::ProposalForm.include Decidim::SimpleProposal::ProposalFormOverride
+          Decidim::Proposals::Admin::ProposalForm.include Decidim::SimpleProposal::ProposalFormOverride
           Decidim::ScopesHelper.include Decidim::SimpleProposal::ScopesHelperOverride
 
           Decidim::Proposals::Admin::ProposalsController.include Decidim::SimpleProposal::Admin::ProposalsControllerOverride
