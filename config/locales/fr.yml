@@ -5,3 +5,4 @@ fr:
         proposals:
           form:
             require_category: La catégorie est obligatoire
+            require_scope: Le secteur est obligatoire
