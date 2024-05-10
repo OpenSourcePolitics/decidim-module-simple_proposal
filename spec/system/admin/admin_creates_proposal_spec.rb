@@ -41,6 +41,7 @@ describe "Admin creates proposals", type: :system do
 
     expect(page).to have_content("city.jpeg")
     expect(page).to have_content("FOO BAR")
+    expect(page).to have_content("require_category")
+    expect(page).to have_content("require_scope")
   end
-
 end
