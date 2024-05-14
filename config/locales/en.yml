@@ -48,6 +48,11 @@ en:
       statistics:
         proposals_count: Ideas
     components:
+      proposals:
+        settings:
+          global:
+            require_category: Category is required
+            require_scope: Scope is required
       component_order_selector:
         order:
           proposal: Idea
