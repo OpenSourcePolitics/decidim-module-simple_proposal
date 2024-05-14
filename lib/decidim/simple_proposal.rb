@@ -8,11 +8,11 @@ module Decidim
     include ActiveSupport::Configurable
 
     config_accessor :require_scope do
-      false
+      true
     end
 
     config_accessor :require_category do
-      false
+      true
     end
   end
 end

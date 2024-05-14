@@ -13,8 +13,8 @@ module Decidim
           callback.raw_filter.attributes.delete :scope if callback.raw_filter.respond_to? :attributes
         end
 
-        attribute :require_category, :boolean
-        attribute :require_scope, :boolean
+        attribute :require_category, :boolean, default: Decidim::SimpleProposal.require_category
+        attribute :require_scope, :boolean, default: Decidim::SimpleProposal.require_scope
 
         validates :category_id, presence: true, if: ->(form) { form.require_category? }
         validates :scope_id, presence: true, if: ->(form) { form.require_scope? }
