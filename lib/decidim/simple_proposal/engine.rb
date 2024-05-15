@@ -5,7 +5,7 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::SimpleProposal
 
-      initializer "decidim_anonymous_proposals.proposal_component_settings" do
+      initializer "decidim_simple_proposal.proposal_component_settings" do
         component = Decidim.find_component_manifest(:proposals)
         component.settings(:global) do |settings|
           settings.attribute :require_category, type: :boolean, default: Decidim::SimpleProposal.require_category
