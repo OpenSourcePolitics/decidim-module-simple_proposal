@@ -49,11 +49,11 @@ module Decidim
         end
 
         def require_category?
-          current_component.settings.require_category
+          current_component.settings.require_category && categories_enabled?
         end
 
         def require_scope?
-          current_component.settings.require_scope
+          current_component.settings.require_scope && scopes_enabled?
         end
 
         private
