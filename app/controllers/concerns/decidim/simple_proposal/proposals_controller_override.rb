@@ -47,7 +47,6 @@ module Decidim
             @step = Decidim::Proposals::ProposalsController::STEP1
             @proposal ||= Decidim::Proposals::Proposal.new(component: current_component)
             @form = form_proposal_model
-            @form.require_category = current_component.settings.require_category
             @form.body = translated_proposal_body_template
             @form.attachment = form_attachment_new
           end
@@ -57,7 +56,6 @@ module Decidim
           enforce_permission_to :create, :proposal
           @step = Decidim::Proposals::ProposalsController::STEP1
           @form = form(Decidim::Proposals::ProposalForm).from_params(proposal_creation_params)
-          @form.require_category = Decidim::SimpleProposal.require_category
 
           @proposal = Decidim::Proposals::Proposal.new(@form.attributes.except(
             :user_group_id,
