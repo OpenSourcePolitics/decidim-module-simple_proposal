@@ -3,17 +3,19 @@
 require "spec_helper"
 
 describe "User creates proposal simply", type: :system do
-  let(:organization) { create :organization, *organization_traits, available_locales: [:en] }
-  let(:participatory_process) { create :participatory_process, :with_steps, organization: organization }
+  let!(:organization) { create :organization, *organization_traits, available_locales: [:en] }
+  let!(:participatory_process) { create :participatory_process, :with_steps, organization: organization }
   let(:manifest_name) { "proposals" }
   let(:manifest) { Decidim.find_component_manifest(manifest_name) }
   let!(:user) { create :user, :confirmed, organization: organization }
+  let(:settings) { nil }
   let!(:component) do
     create(:proposal_component,
            :with_creation_enabled,
            :with_attachments_allowed,
            manifest: manifest,
-           participatory_space: participatory_process)
+           participatory_space: participatory_process,
+           settings: settings)
   end
   let(:organization_traits) { [] }
 
@@ -34,13 +36,10 @@ describe "User creates proposal simply", type: :system do
     visit_component
   end
 
-  context "when category and scope are required" do
-    before do
-      allow(Decidim::SimpleProposal).to receive(:require_category).and_return(true)
-      allow(Decidim::SimpleProposal).to receive(:require_scope).and_return(true)
-    end
+  context "when category and scope are required," do
+    let(:settings) { { require_category: true, require_scope: true } }
 
-    context "without any scopes or categories" do
+    context "without any scopes or categories," do
       before do
         expect(Decidim::Scope.count).to eq(0)
         expect(Decidim::Category.count).to eq(0)
@@ -137,11 +136,8 @@ describe "User creates proposal simply", type: :system do
     end
   end
 
-  context "when category and scope arent required" do
-    before do
-      allow(Decidim::SimpleProposal).to receive(:require_category).and_return(false)
-      allow(Decidim::SimpleProposal).to receive(:require_scope).and_return(false)
-    end
+  context "when category and scope arent required," do
+    let(:settings) { { require_category: true, require_scope: true } }
 
     it "creates a new proposal without category and scope" do
       click_link "New idea"
