@@ -137,7 +137,7 @@ describe "User creates proposal simply", type: :system do
   end
 
   context "when category and scope arent required," do
-    let(:settings) { { require_category: true, require_scope: true } }
+    let(:settings) { { require_category: false, require_scope: false } }
 
     it "creates a new proposal without category and scope" do
       click_link "New idea"
