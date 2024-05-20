@@ -17,12 +17,17 @@ describe "User edits proposals", type: :system do
            participatory_space: participatory_process,
            settings: settings)
   end
+  let(:organization_traits) { [] }
 
   let(:proposal_title) { ::Faker::Lorem.paragraph }
   let(:proposal_body) { ::Faker::Lorem.paragraph }
 
   def visit_component
-    switch_to_host(organization.host)
+    if organization_traits&.include?(:secure_context)
+      switch_to_secure_context_host
+    else
+      switch_to_host(organization.host)
+    end
     page.visit main_component_path(component)
   end
 
