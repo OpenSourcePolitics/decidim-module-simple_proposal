@@ -212,9 +212,6 @@ en:
           publish:
             success: All ideas have been published
         proposals:
-          form:
-            require_category: Category is required
-            require_scope: Scope is required
           show:
             body: Idean kuvaus
         proposal_answers:
