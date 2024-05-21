@@ -7,6 +7,7 @@ describe "User edits proposals", type: :system do
   let!(:organization) { create :organization, available_locales: [:en] }
   let!(:participatory_process) { create :participatory_process, :with_steps, organization: organization }
   let(:manifest_name) { "proposals" }
+  let(:manifest) { Decidim.find_component_manifest(manifest_name) }
   let!(:user) { create :user, :confirmed, organization: organization }
   let(:settings) { nil }
   let(:component) do
@@ -33,7 +34,7 @@ describe "User edits proposals", type: :system do
 
   context "when user has proposal" do
     let!(:proposal) { create(:proposal, users: [user], component: component) }
-    let(:settings) { { require_category: false, require_scope: false } }
+    let(:settings) { { require_category: false, require_scope: false, attachments_allowed: true } }
 
     before do
       login_as user, scope: :user
