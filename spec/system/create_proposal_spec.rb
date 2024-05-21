@@ -39,7 +39,7 @@ describe "User creates proposal simply", type: :system do
   context "when category and scope are required," do
     let(:settings) { { require_category: true, require_scope: true } }
 
-    context "without any scopes or categories," do
+    context "without any scopes or categories" do
       before do
         expect(Decidim::Scope.count).to eq(0)
         expect(Decidim::Category.count).to eq(0)
