@@ -68,7 +68,9 @@ module Decidim
             :photos,
             :add_photos,
             :documents,
-            :add_documents
+            :add_documents,
+            :require_category,
+            :require_scope
           ).merge(
             component: current_component
           ))
