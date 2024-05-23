@@ -4,28 +4,37 @@ require "spec_helper"
 
 describe "User edits proposals", type: :system do
   include_context "with a component"
-  let(:organization) { create :organization, available_locales: [:en] }
-  let(:participatory_process) { create :participatory_process, :with_steps, organization: organization }
+  let!(:organization) { create :organization, available_locales: [:en] }
+  let!(:participatory_process) { create :participatory_process, :with_steps, organization: organization }
   let(:manifest_name) { "proposals" }
+  let(:manifest) { Decidim.find_component_manifest(manifest_name) }
   let!(:user) { create :user, :confirmed, organization: organization }
+  let(:settings) { nil }
   let(:component) do
     create(:proposal_component,
            :with_creation_enabled,
            :with_attachments_allowed,
            manifest: manifest,
-           participatory_space: participatory_process)
+           participatory_space: participatory_process,
+           settings: settings)
   end
+  let(:organization_traits) { [] }
 
   let(:proposal_title) { ::Faker::Lorem.paragraph }
   let(:proposal_body) { ::Faker::Lorem.paragraph }
 
-  before do
-    allow(Decidim::SimpleProposal).to receive(:require_category).and_return(false)
-    allow(Decidim::SimpleProposal).to receive(:require_scope).and_return(false)
+  def visit_component
+    if organization_traits&.include?(:secure_context)
+      switch_to_secure_context_host
+    else
+      switch_to_host(organization.host)
+    end
+    page.visit main_component_path(component)
   end
 
   context "when user has proposal" do
     let!(:proposal) { create(:proposal, users: [user], component: component) }
+    let(:settings) { { require_category: false, require_scope: false, attachments_allowed: true } }
 
     before do
       login_as user, scope: :user

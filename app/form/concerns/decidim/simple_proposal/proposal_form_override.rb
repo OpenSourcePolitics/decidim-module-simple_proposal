@@ -13,10 +13,13 @@ module Decidim
           callback.raw_filter.attributes.delete :scope if callback.raw_filter.respond_to? :attributes
         end
 
+        attribute :require_category, :boolean, default: Decidim::SimpleProposal.require_category
+        attribute :require_scope, :boolean, default: Decidim::SimpleProposal.require_scope
+
         validates :category_id, presence: true, if: ->(form) { form.require_category? }
         validates :scope_id, presence: true, if: ->(form) { form.require_scope? }
-        validate :check_category
-        validate :check_scope
+        validate :check_category, if: ->(form) { form.require_category? }
+        validate :check_scope, if: ->(form) { form.require_scope? }
 
         def map_model(model)
           super
@@ -46,11 +49,11 @@ module Decidim
         end
 
         def require_category?
-          Decidim::SimpleProposal.require_category && categories_enabled?
+          current_component.settings.require_category && categories_enabled?
         end
 
         def require_scope?
-          Decidim::SimpleProposal.require_scope && scopes_enabled?
+          current_component.settings.require_scope && scopes_enabled?
         end
 
         private

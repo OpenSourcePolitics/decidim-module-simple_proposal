@@ -5,6 +5,14 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::SimpleProposal
 
+      # Allow admins to set the 'Scope' and 'Category' fields as required or optional in the decidim-proposal creation form
+      initializer "decidim_simple_proposal.proposal_component_settings" do
+        component = Decidim.find_component_manifest(:proposals)
+        component.settings(:global) do |settings|
+          settings.attribute :require_category, type: :boolean, default: Decidim::SimpleProposal.require_category
+          settings.attribute :require_scope, type: :boolean, default: Decidim::SimpleProposal.require_scope
+        end
+      end
       initializer "decidim_proposals.overrides" do |app|
         app.config.to_prepare do
           Decidim::Proposals::ProposalsController.include Decidim::SimpleProposal::ProposalsControllerOverride
