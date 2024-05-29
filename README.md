@@ -19,6 +19,11 @@ Rejected -> Does not proceed to voting
 
 A [Decidim](https://github.com/decidim/decidim) module that provides a simplified proposal creation.
 
+## New Features
+
+- Added "Scope" and "Category" fields in the Backoffice for proposals.
+- Admin can make "Scope" and "Category" fields mandatory for users when creating a proposal.
+
 ## Installation
 
 Add this line to your application's Gemfile:
