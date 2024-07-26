@@ -4,6 +4,10 @@ require "spec_helper"
 
 module Decidim
   describe ScopesHelper, type: :helper do
+    include ActionView::Helpers::SanitizeHelper
+    include ActionView::Helpers::TagHelper
+    include Decidim::TranslatableAttributes
+    include Decidim::SanitizeHelper
     describe "scopes_picker_tag" do
       let(:scope) { create(:scope) }
 
