@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "decidim/dev"
+$LOAD_PATH.unshift File.expand_path("../../path/to/external/libraries", __FILE__)
+
 require "decidim/sanitize_helper"
 
 ENV["ENGINE_ROOT"] = File.dirname(__dir__)
