@@ -1,9 +1,9 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
   describe ScopesHelper, type: :helper do
-
     describe "#ancestors" do
       let(:first_organization) { create(:organization) }
       let(:second_organization) { create(:organization) }
