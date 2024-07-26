@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "decidim/dev"
+require_relative "../decidim-core/app/helpers/decidim/sanitize_helper"
 
 ENV["ENGINE_ROOT"] = File.dirname(__dir__)
 
