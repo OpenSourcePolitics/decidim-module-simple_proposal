@@ -186,11 +186,6 @@ module Decidim
             end
           end
         end
-
-        # TODO: Remove after feature/configurable_order_for_proposals is merged!
-        def default_order
-          "recent"
-        end
       end
     end
   end
