@@ -22,5 +22,15 @@ module Decidim
         expect(result).not_to include(third_scope, fourth_scope)
       end
     end
+
+    describe "selected_scope in project edit context" do
+      it "returns decidim_scope_id of form object" do
+        # we want to test this added case form.try(:object).try(:decidim_scope_id)
+        Object = Struct.new(:decidim_scope_id)
+        Myform = Struct.new(:object)
+        form = Myform.new(Object.new(10))
+        expect(selected_scope(form)).to eq(10)
+      end
+    end
   end
 end
