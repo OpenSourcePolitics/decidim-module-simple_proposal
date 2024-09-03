@@ -15,7 +15,8 @@ module Decidim
         def selected_scope(form)
           form.try(:scope_id) ||
             form.try(:settings).try(:scope_id) ||
-            form.try(:object).try(:scope_id)
+            form.try(:object).try(:scope_id) ||
+            form.try(:object).try(:decidim_scope_id)
         end
 
         def simple_scope_options(root: false, options: {})
